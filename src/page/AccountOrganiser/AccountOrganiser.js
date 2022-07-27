@@ -30,7 +30,7 @@ export default function AccountOrganiser() {
 
 
       getAccounData();
-  },[accountData])
+  },[])
 
   const toggleModalRequestToken = () => {
     setShowModalRequest(!showModalRequest);

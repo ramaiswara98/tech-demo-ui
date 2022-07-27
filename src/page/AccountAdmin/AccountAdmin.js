@@ -65,7 +65,7 @@ export default function AccountAdmin() {
     };
 
     getPayerList();
-  }, [accountData]);
+  }, []);
 
   const toggle = () => {
     setShowModal(!showModal);
