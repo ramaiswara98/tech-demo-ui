@@ -1,0 +1,45 @@
+.card-account{
+text-align: left;
+max-width: 800px;
+justify-content: center;
+margin: auto;
+}
+
+.card-account.name{
+    text-align: left
+}
+.card-account.wallet{
+    text-align: left;
+    margin-top: 0px;
+}
+
+.account-wrapper {
+    max-width: 100%;
+    width: 100%;
+    padding: 0px 60px;
+    margin: 30px auto;
+    display: block;
+    flex-wrap: wrap;
+    gap: 2em;
+    justify-content: center;
+  }
+
+  .tab-button{
+    margin-left: 30px;
+    background-color: none;
+    cursor: pointer;
+  }
+
+  .tab-button:hover{
+    text-decoration: underline;
+    font-size: large;
+  }
+
+  .tabs-container{
+    flex-wrap: wrap;
+    justify-content: center;
+    display: flex;
+    text-align: center;
+    margin: 20px auto;
+  }
+ 

@@ -1,0 +1,27 @@
+.art-chooser-wrapper {
+    max-width: 1350px;
+    padding: 0px 60px;
+    margin: 30px auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+    justify-content: center;
+  }
+ .galeryContainer{
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .button-red{
+    background-color: tomato;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 10px;
+    border:none;
+    color: #fff;
+    margin: auto;
+  }
+
+  

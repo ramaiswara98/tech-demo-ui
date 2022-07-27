@@ -1,0 +1,37 @@
+.tab-button-admin{
+    padding: 3px 8px 3px 8px;
+    cursor: pointer;
+    margin: 20px 20px 20px 20px;
+    border-radius: 5px;
+    width: 150px;
+  }
+
+  .tab-button-admin:hover{
+    background-color: gray;
+    color: aliceblue;
+  }
+
+  .tabs-container{
+    flex-wrap: wrap;
+    justify-content: center;
+    display: flex;
+    text-align: center;
+    margin: 20px auto;
+    border-radius: 5px;
+  }
+ 
+  .active-tab{
+    background-color: gray;
+    padding: 3px 8px 3px 8px;
+    background-color: none;
+    cursor: pointer;
+    margin: 20px 20px 20px 20px;
+    border-radius: 5px;
+    width: 150px;
+    color: aliceblue;
+  }
+
+  .active-tab:hover{
+    background-color: gray;
+    color: aliceblue;
+  }

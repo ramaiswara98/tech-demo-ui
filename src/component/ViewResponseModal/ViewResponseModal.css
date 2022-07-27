@@ -1,0 +1,30 @@
+.galeryContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px 20px 10px 20px;
+  }
+
+  .cardImage{
+    padding-bottom: 10px;
+    width: 200px;
+    height: 200px !important;
+}
+
+.card-images{
+    background-color: bisque;
+    margin: 5px;
+    padding: 7px;
+    border : solid 3px transparent
+}
+
+.selected {
+    border: solid 3px red;
+    padding: 7px;
+}
+
+.modal-dialogs{
+    width: 60% !important;
+    max-width: none;
+    
+}

@@ -1,0 +1,23 @@
+.card-image{
+    background-color: bisque;
+    margin: 20px;
+    padding: 7px;
+    border : solid 3px transparent
+}
+
+.cardImage{
+    padding-bottom: 10px;
+    width: 200px;
+    height: 200px !important;
+}
+
+.card-image:hover{
+    border: solid 3px red;
+    padding: 7px;
+    cursor: pointer;
+}
+
+.selected {
+    border: solid 3px red;
+    padding: 7px;
+}

@@ -1,0 +1,23 @@
+.homeContainer{
+    background: #fff;
+
+}
+.column{
+    text-align:  center;
+    margin: auto;
+}
+.row-home{
+    --bs-gutter-x:none;
+    --bs-gutter-y:none;
+    height: 100vh;
+}
+
+.title{
+    font-size: 45pt;
+    width: 400px;
+    margin: auto;
+}
+.title-container{
+    width: 100%;
+    text-align: center;
+}
