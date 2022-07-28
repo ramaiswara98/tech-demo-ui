@@ -103,7 +103,7 @@ export default function ArtChooser() {
 
   return (
     <div >
-      <h2>Please choose five picture that will be examinate</h2>
+      <h2 style={{textAlign:"center"}}>please choose your 5 favorite pictures from the list of images below</h2>
   
       <div className='galeryContainer'>
         {artList.length > 0 ? (
