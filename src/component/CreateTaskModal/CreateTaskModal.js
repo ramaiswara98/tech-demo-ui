@@ -40,8 +40,8 @@ export default function CreateTaskModal(props) {
         // for(let i=0; i<picSize;i++){
             const item = (<>
                 <Form.Group>
-                <Form.Label>Link Pic {picSize+1}</Form.Label>
-                        <Form.Control type={'text'} placeholder='Enter Title' name={picSize} onChange={(e)=> {onChange(e)}}></Form.Control>
+                <Form.Label>Picture URL {picSize+1}</Form.Label>
+                        <Form.Control type={'text'} placeholder='Enter Picture URL' name={picSize} onChange={(e)=> {onChange(e)}}></Form.Control>
                 </Form.Group>
             </>)
             newUrl[picSize] = {
@@ -55,6 +55,9 @@ export default function CreateTaskModal(props) {
     }
 
     const createTask = async() => {
+        if(urlList.length < 6){
+            setAlert(<Alert variant='warning'>Minimum picture url must be 6</Alert>)
+        }else{
         setAlert(<Alert variant='secondary'>Creating Task ...</Alert>)
         const data = {
             organiserId:localStorage.getItem('id'),
@@ -67,6 +70,7 @@ export default function CreateTaskModal(props) {
         console.log(create.data);
         setAlert(<Alert variant='success'>Successfully Created Task</Alert>)
         window.location.reload();
+        }
     }
   return (
     <div>
@@ -96,7 +100,7 @@ export default function CreateTaskModal(props) {
                             <></>
                         )}
                     <div style={{textAlign:"right", margin:"20px auto"}}>
-                        <Button className='btn btn-primary' onClick={() => {getFormUrl()}}>Add Pic Link</Button>
+                        <Button className='btn btn-primary' onClick={() => {getFormUrl()}}>Add Picture URL</Button>
                     </div>
                     <hr/>
                     <div style={{textAlign:"center", margin:"20px auto"}}>

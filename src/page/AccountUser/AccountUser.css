@@ -5,10 +5,11 @@ justify-content: center;
 margin: auto;
 }
 
-.card-account.name{
-    text-align: left
+.card-account-name{
+    text-align: left;
+    font-size: 20px !important;
 }
-.card-account.wallet{
+.card-account-wallet{
     text-align: left;
     margin-top: 0px;
 }
@@ -24,15 +25,17 @@ margin: auto;
     justify-content: center;
   }
 
-  .tab-button{
-    margin-left: 30px;
-    background-color: none;
+  .tab-button-user{
+    padding: 3px 8px 3px 8px;
     cursor: pointer;
+    margin: 20px 20px 20px 20px;
+    border-radius: 5px;
+    width: 150px;
   }
 
-  .tab-button:hover{
-    text-decoration: underline;
-    font-size: large;
+  .tab-button-user:hover{
+    background-color: gray;
+    color: aliceblue;
   }
 
   .tabs-container{
@@ -41,5 +44,22 @@ margin: auto;
     display: flex;
     text-align: center;
     margin: 20px auto;
+    border-radius: 5px;
+  }
+ 
+  .active-tab{
+    background-color: gray;
+    padding: 3px 8px 3px 8px;
+    background-color: none;
+    cursor: pointer;
+    margin: 20px 20px 20px 20px;
+    border-radius: 5px;
+    width: 150px;
+    color: aliceblue;
+  }
+
+  .active-tab:hover{
+    background-color: gray;
+    color: aliceblue;
   }
  

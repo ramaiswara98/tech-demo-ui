@@ -4,10 +4,11 @@ import RequestCaller from '../../api/RequestCaller';
 import TokenCaller from '../../api/TokenCaller';
 import UserCaller from '../../api/UserCaller';
 import RequestTokenModal from '../../component/RequestTokenModal.js/RequestTokenModal';
+import Avatar from "../../assets/images/man.png"
 
 export default function AccountOrganiser() {
-  const [accountData,setAccountData] = useState([]);
-  const [tokenList, setTokenList] = useState([]);
+  const [accountData,setAccountData] = useState(null);
+  const [tokenList, setTokenList] = useState(null);
   const [availableTokenList, setAvailableTokenList] = useState([]);
   const [showModalRequest, setShowModalRequest] = useState(false);
   const [requestList, setRequestList] = useState([])
@@ -40,52 +41,9 @@ export default function AccountOrganiser() {
     setTabActive(tabs)
   }
 
-  // const getPhantom = async(index) => {
-  // const isPhantomInstalled = window.phantom?.solana?.isPhantom;
-  // const getProvider = () => {
-  //   if ('phantom' in window) {
-  //     const provider = window.phantom?.solana;
-  //     // console.log(provider)
-  //     if (provider?.isPhantom) {
-  //       return provider;
-  //     }
-  //   }
-    
-  //   window.open('https://phantom.app/', '_blank');
-  // };
-  // const getAccount = async() => {
-  //   const isPhantomInstalled = window.phantom?.solana?.isPhantom;
-  //   // console.log(isPhantomInstalled)
-  //   const provider = getProvider(); // see "Detecting the Provider"
-  //   try {
-  //       const resp = await provider.connect();
-  //       // console.log(resp.publicKey.toString());
-  //       setPhantomWallet(resp.publicKey.toString());
-  //       // return (resp.publicKey.toString());
-  //       // 26qv4GCcx98RihuK3c4T6ozB3J7L6VwCuFVc7Ta2A3Uo 
-  //   } catch (err) {
-  //     return null;
-  //   }
-  
-  // }
-  // await getProvider();
-  // await getAccount();
-  // const sendToken = () => {
-  //   const selectedToken = tokenList[index];
-  //   const requestData = {
-  //     organiserName:"none",
-  //     organiserWallet:phantomWallet,
-  //     amount:(1*1000000000),
-
-
-  //   }
-  // }
-  // console.log(phantomWallet)
-  // }
-
   return (
     <div className={'container'}>
-      {(accountData.length != 0)? (
+      {(accountData != null)? (
         <>
         <RequestTokenModal
           show={showModalRequest}
@@ -98,14 +56,14 @@ export default function AccountOrganiser() {
          <Card className='card-account'>
           <Card.Body>
             <Row>
-              <Col>
-              <p className='card-account-name'>{accountData.name}</p>
-              <p className='card-account-wallet'>Wallet Address : <br/><b>{accountData.walletPublicKey}</b></p>
+            <Col style={{margin:"auto"}}>
+              <p className='card-account-name'><b>{accountData.name}</b></p>
+              <p className='card-account-wallet'>SOL Wallet Address : <br/><b>{accountData.walletPublicKey}</b></p>
             
               </Col>
               
-              <Col style={{margin:"auto", textAlign:"right"}}>
-              <Button style={{width:"100px", height:"50px"}}>Log Out</Button>
+              <Col style={{margin:"auto 20px auto", textAlign:"right"}}>
+              <img src={Avatar} style={{width:"120px"}}/>
               </Col>
             </Row>
            
@@ -134,16 +92,18 @@ export default function AccountOrganiser() {
             </tr>
             </thead>
             <tbody>
-              {tokenList.length > 0 ? (
+              {tokenList != null ? (
+                <>
+                 {tokenList.length > 0 ? (
                 <>{tokenList.map((token,index) => {
                   return (
                   <tr>
-                    <td><img src="https://seeklogo.com/images/S/shiba-inu-shib-logo-9542F950B0-seeklogo.com.png?v=637892479410000000"  width={"45px"}/></td>
-                    <td><b>{token.name}</b></td>
+                    <td style={{textAlign:"center"}}><img src="https://img.icons8.com/ios-filled/452/help.png"  width={"45px"}/></td>
+                    <td><b>{token.name}</b><br/> Token Id : <b>{token.tokenId}</b></td>
                     <td><b>{token.amount}</b></td>
                     <td>
-                      <Button className='btn btn-primary' >History</Button>
-                      <Button className='btn btn-primary' style={{marginLeft:"10px"}} >Send to <img src='https://bitcoin-trading.io/wp-content/uploads/2022/02/phantom-logo-long.png' height={"30px"} /></Button>
+                      <Button className='btn btn-primary' onClick={() => {window.open("https://solscan.io/account/"+token.address+"?cluster="+process.env.REACT_APP_CLUSTER,"_blank")}}>See History</Button>
+                      {/* <Button className='btn btn-primary' style={{marginLeft:"10px"}} >Send to <img src='https://bitcoin-trading.io/wp-content/uploads/2022/02/phantom-logo-long.png' height={"30px"} /></Button> */}
                     </td>
                   </tr>
                   
@@ -156,6 +116,12 @@ export default function AccountOrganiser() {
                 </tr>
                 </>
               )}
+                </>
+
+              ):(<>
+              Loading ...
+              </>)}
+             
             
  
             </tbody>
@@ -233,7 +199,7 @@ export default function AccountOrganiser() {
             </div>
         </>
       ):(
-        <></>
+        <>Loading</>
       )}
        
     </div>

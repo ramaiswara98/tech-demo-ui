@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { Button, Card,Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import CreateTaskModal from '../../component/CreateTaskModal/CreateTaskModal'
-import UserCaller from '../../api/UserCaller'
+import moment from 'moment'
 
+
+import UserCaller from '../../api/UserCaller'
 import "./TaskListOrganiser.css"
 import TaskCaller from '../../api/TaskCaller'
+import TaskAvatar from "../../assets/images/check-list.png"
 
 export default function TaskListOrganiser() {
     const [showCreateTaskModal, setShowCreateTaskModal] = useState();
@@ -32,7 +35,11 @@ export default function TaskListOrganiser() {
             show={showCreateTaskModal}
             toggle={toggleCreateTaskModal}
         />
-        <Button onClick={() => {toggleCreateTaskModal()}}>Create Task</Button>
+        <div style={{textAlign:"center"}}>
+        <Button onClick={() => {toggleCreateTaskModal()}} >Create Task</Button>
+        <hr/>
+        </div>
+        
             {taskList.length > 0 ? (
                 <>
                 {taskList.map((task,index) => {
@@ -41,10 +48,13 @@ export default function TaskListOrganiser() {
                          <Card className='cards'>
                             <Card.Body>
                                 <Row>
-                                    <Col>
+                                    <Col style={{textAlign:"center"}}>
+                                        <img src={TaskAvatar} width={"120px"}/>
+                                    </Col>
+                                    <Col style={{margin:"auto"}}>
                                     <h5>{task.title}</h5>
                                     <p>Participant : {task.response.length}/{task.maxParticipant}
-                                    <br/>Deadline : {task.deadline}</p>
+                                    <br/>Deadline : {moment(task.deadline).format('d - MMMM - YYYY')}</p>
                                     </Col>
                                     <Col style={{margin:"auto",textAlign:"right",marginRight:"10px"}}>
                                     <Link to={"/organiser/submission-list/"+task._id} className="btn btn-primary">See Submission</Link>

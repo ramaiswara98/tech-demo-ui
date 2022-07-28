@@ -41,6 +41,7 @@ export default function SignUpModal(props) {
     }
 
     const onSubmit = async() => {
+        setAlert(<Alert variant='secondary'>Storing Data ...</Alert>)
         const data = {
             name,
             email,

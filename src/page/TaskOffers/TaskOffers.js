@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Card, Col, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import TaskCaller from "../../api/TaskCaller"
 import moment from 'moment'
 
+
+import TaskCaller from "../../api/TaskCaller"
 import "./TaskOffers.css"
+import TaskImage from "../../assets/images/check-list.png"
 
 export default function TaskOffers() {
     const [taskList,setTaskList] = useState([]);
@@ -33,6 +35,9 @@ export default function TaskOffers() {
                     <Card className='cards shadow-sm bg-white rounded'>
                         <Card.Body>
                             <Row>
+                                <Col style={{textAlign:"center"}}>
+                                    <img src={TaskImage} alt="Task Icon" style={{width:"120px"}}/>
+                                </Col>
                                 <Col>
                                 <h5>{task.title}</h5>
                                 <p>Participant : {task.response.length}/{task.maxParticipant}

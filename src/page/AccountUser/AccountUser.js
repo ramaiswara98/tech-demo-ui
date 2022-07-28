@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Card, Col, Row, Table } from 'react-bootstrap'
+
 import HistoryTransactionModal from '../../component/HistoryTransactionModal/HistoryTransactionModal'
 import "./AccountUser.css"
 import UserCaller from '../../api/UserCaller';
 import TokenCaller from '../../api/TokenCaller';
+import Avatar from "../../assets/images/man.png"
 
 export default function AccountUser() {
   
   const [modal,setModal]= useState(false)
   const [accountData,setAccountData] = useState(null);
-  const [tokenList,setTokenList] = useState([]);
+  const [tokenList,setTokenList] = useState(null);
   const [tabActive,setTabActive] = useState('balance');
 
   const [phantomWallet,setPhantomWallet] = useState(null);
@@ -125,14 +127,14 @@ export default function AccountUser() {
         <Card className='card-account'>
           <Card.Body>
             <Row>
-              <Col>
-              <p className='card-account-name'>{accountData.name}</p>
-              <p className='card-account-wallet'>Wallet Address : <br/><b>{accountData.walletPublicKey}</b></p>
+              <Col style={{margin:"auto"}}>
+              <p className='card-account-name'><b>{accountData.name}</b></p>
+              <p className='card-account-wallet'>SOL Wallet Address : <br/><b>{accountData.walletPublicKey}</b></p>
             
               </Col>
               
-              <Col style={{margin:"auto", textAlign:"right"}}>
-              <Button style={{width:"100px", height:"50px"}}>Log Out</Button>
+              <Col style={{margin:"auto 20px auto", textAlign:"right"}}>
+              <img src={Avatar} style={{width:"120px"}}/>
               </Col>
             </Row>
            
@@ -140,8 +142,8 @@ export default function AccountUser() {
         </Card>
         </div>
         <div  class={"tabs-container"}>
-          <p className='tab-button' onClick={() => {changeTab("balance")}}>Balance</p>
-          <p className='tab-button' onClick={() => {changeTab("task")}}>Task Done</p>
+          <p className={tabActive === "balance" ? "active-tab":"tab-button-user"} onClick={() => {changeTab("balance")}}>Balance</p>
+          <p className={tabActive === "task" ? "active-tab":"tab-button-user"} onClick={() => {changeTab("task")}}>Task Done</p>
         </div>
         {tabActive === "balance" ? (
           <>
@@ -159,16 +161,18 @@ export default function AccountUser() {
             </tr>
             </thead>
             <tbody>
-              {tokenList.length > 0 ? (
+              {tokenList !== null ? (
+                <>
+                {tokenList.length > 0 ? (
                 <>
                 {tokenList.map((token,index) => {
                   return(<>
                    <tr>
-                      <td><img src="https://seeklogo.com/images/S/shiba-inu-shib-logo-9542F950B0-seeklogo.com.png?v=637892479410000000"  width={"45px"}/></td>
-                      <td><b>{token.name}</b></td>
+                      <td style={{textAlign:"center"}}><img src="https://img.icons8.com/ios-filled/452/help.png"  width={"45px"}/></td>
+                      <td><b>{token.name}</b><br/> Token Id : <b>{token.tokenId}</b></td>
                       <td><b>{token.amount}</b></td>
                       <td>
-                        <Button className='btn btn-primary' onClick={()=>{historyOnClick()}}>History</Button>
+                        <Button className='btn btn-primary' onClick={() => {window.open("https://solscan.io/account/"+token.address+"?cluster="+process.env.REACT_APP_CLUSTER,"_blank")}}>History</Button>
                         <Button className={buttonVariant} style={{marginLeft:"10px"}} onClick={() => {sendPhantom(index)}}>{buttonText === "state" ? (
                           <>
                           Send to <img src='https://bitcoin-trading.io/wp-content/uploads/2022/02/phantom-logo-long.png' height={"30px"} />
@@ -185,7 +189,14 @@ export default function AccountUser() {
                 </>
               ):(<>
                 <tr>No Token Yet</tr>
-              </>)}
+              </>)}                
+                </>
+              ) : (
+                <>
+                Loading ...
+                </>
+              )}
+              
            
  
             </tbody>

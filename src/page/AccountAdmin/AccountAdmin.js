@@ -31,13 +31,15 @@ import MintTokenModal from "../../component/MintTokenModal/MintTokenModal";
 import RequestCaller from "../../api/RequestCaller";
 import AcceptRequestModal from "../../component/AcceptRequestModal/AcceptRequestModal";
 
+import Avatar from "../../assets/images/man.png"
+
 export default function AccountAdmin() {
   const [showModal, setShowModal] = useState(false);
   const [showModalAirDrop, setShowModalAirDrop] = useState(false);
   const [showModalCreateToken, setShowModalCreateToken] = useState(false);
   const [listPayer, setListPayer] = useState([]);
-  const [accountData, setAccountData] = useState({});
-  const [tokenList, setTokenList] = useState({});
+  const [accountData, setAccountData] = useState(null);
+  const [tokenList, setTokenList] = useState(null);
   const [showModalMint, setShowModalMint] = useState(false);
   const [selectedTokenId, setSelectedTokenId] = useState();
   const [requestList, setRequestList] = useState([]);
@@ -98,7 +100,7 @@ export default function AccountAdmin() {
 
   return (
     <div className={"container"}>
-      {accountData !== {} ? (
+      {accountData !== null ? (
         <>
           <CreateTokenModal
             show={showModalCreateToken}
@@ -131,19 +133,15 @@ export default function AccountAdmin() {
           <Card className="card-account">
             <Card.Body>
               <Row>
-                <Col>
-                  <p className="card-account-name">{accountData.name}</p>
-                  <p className="card-account-wallet">
-                    Wallet Address : <br />
-                    <b>{accountData.walletPublicKey}</b>
-                  </p>
-                </Col>
-
-                <Col style={{ margin: "auto", textAlign: "right" }}>
-                  <Button style={{ width: "100px", height: "50px" }}>
-                    Log Out
-                  </Button>
-                </Col>
+              <Col style={{margin:"auto"}}>
+              <p className='card-account-name'><b>{accountData.name}</b></p>
+              <p className='card-account-wallet'>SOL Wallet Address : <br/><b>{accountData.walletPublicKey}</b></p>
+            
+              </Col>
+              
+              <Col style={{margin:"auto 20px auto", textAlign:"right"}}>
+              <img src={Avatar} style={{width:"120px"}}/>
+              </Col>
               </Row>
             </Card.Body>
           </Card>
@@ -170,14 +168,14 @@ export default function AccountAdmin() {
                   >
                     Create Token
                   </Button>
-                  <Button
+                  {/* <Button
                     onClick={() => {
                       toggle();
                     }}
                     style={{ marginLeft: "20px" }}
                   >
                     Create Payer Wallet
-                  </Button>
+                  </Button> */}
                   <Button
                     onClick={() => {
                       toggleAirDropModal();
@@ -199,26 +197,21 @@ export default function AccountAdmin() {
                     </tr>
                   </thead>
                   <tbody>
-                    {tokenList.length > 0 ? (
+                    {tokenList !== null ? (
+                      <>
+                      {tokenList.length > 0 ? (
                       <>
                         {tokenList.map((token, index) => {
                           return (
                             <tr>
-                              <td>
-                                <img
-                                  src="https://seeklogo.com/images/S/shiba-inu-shib-logo-9542F950B0-seeklogo.com.png?v=637892479410000000"
-                                  width={"45px"}
-                                />
-                              </td>
-                              <td>
-                                <b>{token.name}</b>
-                              </td>
+                              <td style={{textAlign:"center"}}><img src="https://img.icons8.com/ios-filled/452/help.png"  width={"45px"}/></td>
+                              <td><b>{token.name}</b><br/> Token Id : <b>{token.tokenId}</b></td>
                               <td>
                                 <b>{token.amount}</b>
                               </td>
                               <td>
-                                <Button className="btn btn-primary">
-                                  History
+                                <Button className="btn btn-primary" onClick={() => {window.open("https://solscan.io/account/"+token.address+"?cluster="+process.env.REACT_APP_CLUSTER,"_blank")}}>
+                                  See History
                                 </Button>
                                 <Button
                                   className="btn btn-primary"
@@ -227,23 +220,7 @@ export default function AccountAdmin() {
                                     openMintModal(token.tokenId);
                                   }}
                                 >
-                                  Mint
-                                </Button>
-                                <Button
-                                  className="btn btn-primary"
-                                  style={{ marginLeft: "10px" }}
-                                >
-                                  Send Token
-                                </Button>
-                                <Button
-                                  className="btn btn-primary"
-                                  style={{ marginLeft: "10px" }}
-                                >
-                                  Send to{" "}
-                                  <img
-                                    src="https://bitcoin-trading.io/wp-content/uploads/2022/02/phantom-logo-long.png"
-                                    height={"30px"}
-                                  />
+                                  Mint Token
                                 </Button>
                               </td>
                             </tr>
@@ -255,6 +232,13 @@ export default function AccountAdmin() {
                         <tr>No Token Yet</tr>
                       </>
                     )}
+                      </>
+                    ):(
+                      <>
+                      Loading ...
+                      </>
+                    )}
+                    
                   </tbody>
                 </Table>
               </>

@@ -31,6 +31,7 @@ export default function SignInModal(props) {
   }
 
   const submitOnClick = async () => {
+    setAlertSuccess(<Alert variant='secondary'>Connecting ...</Alert>)
     const data = {
         email,
         password

@@ -5,6 +5,8 @@ import TaskCaller from '../../api/TaskCaller';
 import ApreciateRespondentModal from '../../component/ApreciateRespondentModal/ApreciateRespondentModal';
 import ViewResponseModal from '../../component/ViewResponseModal/ViewResponseModal';
 
+import Avatar from "../../assets/images/man.png"
+
 export default function SubmissionList() {
 
     const [task,setTask] = useState(null);
@@ -40,7 +42,7 @@ export default function SubmissionList() {
     }
   return (
     <div>
-        <div style={{margin:"20px auto"}}>
+        <div style={{margin:"20px auto", textAlign:"center", width:"500px"}}>
             {task !== null ? (
                 <>
                 <ViewResponseModal
@@ -62,13 +64,14 @@ export default function SubmissionList() {
                     {task.response.map((response,index) => {
                         return(
                             <>
-                                <Card>
+                                <Card style={{maxWidth:"400px"}}>
                                     <Card.Body>
                                         <Row>
                                             <Col>
-                                                <p>{response.accountData.name}</p>
+                                                <img src={Avatar} style={{width:"96px"}}/>
+                                                <p style={{fontSize:"18pt", marginTop:"5px"}}><b>{response.accountData.name}</b></p>
                                             </Col>
-                                            <Col>
+                                            <Col style={{margin:"auto"}}>
                                             <Button onClick={() => {clickButton(index)}}>View Response</Button><br/>
                                             <Button style={{marginTop:"20px"}} onClick={() => {openAppreciationModal(index)}} disabled={(response.status)}>{response.status ? "Apreciated":"Appreciate Respondent"}</Button>
                                             </Col>

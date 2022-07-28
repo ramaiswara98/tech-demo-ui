@@ -22,11 +22,7 @@ export default function ViewResponseModal(props) {
                                 </>)
                             })}
                         </div>
-                        <div style={{textAlign:"center", margin:"20px auto"}}>
-                            <Button>
-                                Appreciate Respondent
-                            </Button>
-                        </div>
+                        
                     </>
                 ):(
                     <>
